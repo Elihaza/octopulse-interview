@@ -1,6 +1,7 @@
 .App {
   margin-top: 4rem;
   background-color: green;
+  padding-bottom: 10rem;
 }
 
 #Titre {
@@ -8,20 +9,38 @@
 }
 
 .ListStations {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+  position: relative;
   text-align: center;
   background-color: rgb(15, 15, 15);
-  width: 15%;
+  width: 35%;
+  height: 10%;
   margin-top: 10rem;
   margin-bottom: auto;
-  margin-left: 10rem;
+  margin-left: 7rem;
   border-radius: 20px 20px 20px 20px;
   overflow: auto;
+  
 }
 
 .Stations {
-  background-color: blue;
+  display: flex;
+  justify-content: left;
+  align-content: center;flex-direction: column;
+  background-color: rgb(8, 3, 75);
+  padding-top: 0.5rem;
+  /* width: 20%; */
+  /* height: 0%; */
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  overflow: auto;
+}
+
+.Station:hover {
+  background-color: rgb(15, 15, 15);
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
 }
 
 /* .App-logo {
