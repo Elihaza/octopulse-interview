@@ -1,6 +1,5 @@
 .App {
-  margin-top: 4rem;
-  background-color: green;
+  background-color: rgb(23, 31, 151);
   padding-bottom: 10rem;
 }
 
@@ -8,13 +7,18 @@
   text-align: center;
 }
 
+.StationsAndGraph {
+  display: flex;
+  flex-direction: row;
+}
+
 .ListStations {
   /* display: flex;
   flex-direction: column; */
-  position: relative;
+  /* position: relative; */
   text-align: center;
-  background-color: rgb(15, 15, 15);
-  width: 35%;
+  background-color: rgb(64, 53, 160);
+  width: 25%;
   height: 10%;
   margin-top: 10rem;
   margin-bottom: auto;
@@ -28,7 +32,7 @@
   display: flex;
   justify-content: left;
   align-content: center;flex-direction: column;
-  background-color: rgb(8, 3, 75);
+  background-color: rgb(23, 15, 146);
   padding-top: 0.5rem;
   /* width: 20%; */
   /* height: 0%; */
@@ -41,6 +45,14 @@
   background-color: rgb(15, 15, 15);
   border-radius: 5px 5px 5px 5px;
   cursor: pointer;
+}
+
+.Graph {
+  background-color: red;
+  margin-top: 10rem;
+  margin-bottom: auto;
+  margin-left: 7rem;
+  border-radius: 20px 20px 20px 20px;
 }
 
 /* .App-logo {
