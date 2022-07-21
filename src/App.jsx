@@ -10,20 +10,18 @@ import {
 } from "recharts";
 import React, { useEffect, useState } from 'react';
 
-// // function Display(props) {
-// //   console.log(props);
-// // }
-
-function Graph() {
+function Graph(props) {
   const [array, setArray] = useState([]);
-  const code = "10615120"
-  const url = 'https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=' + code + '&size=1';
+  console.log(props);
+  const url = 'https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=' + props.code_station + '&size=1';
 
+  // console.log(props);
+  console.log(url);
   useEffect(() => {
     const getAllList = async () => {
       const response = await fetch(url);
       const jsonData = await response.json();
-      console.log(jsonData);
+      // console.log(jsonData);
       setArray(jsonData);
       // console.log(array);
     }
@@ -33,45 +31,51 @@ function Graph() {
   console.log('oeoelegraph');
   const data = [
     {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
+      date: "Page A",
+      temperature: 4000,
+      // pv: 2400,
       amt: 2400
     },
     {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
+      date: "Page B",
+      temperature: 3000,
+      // pv: 1398,
       amt: 2210
     },
     {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
+      date: "Page C",
+      temperature: 2000,
+      // pv: 9800,
       amt: 2290
     },
     {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
+      date: "Page D",
+      temperature: 2780,
+      // pv: 3908,
       amt: 2000
     },
     {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
+      date: "Page E",
+      temperature: 1890,
+      // pv: 4800,
       amt: 2181
     },
     {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
+      date: "Page F",
+      temperature: 2390,
+      // pv: 3800,
       amt: 2500
     },
     {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
+      date: "Page G",
+      temperature: 3490,
+      // pv: 4300,
+      amt: 2100
+    },
+    {
+      date: "Test",
+      temperature: 4300,
+      // pv: 4300,
       amt: 2100
     }
   ];
@@ -88,17 +92,17 @@ function Graph() {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <XAxis dataKey="date" />
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line
+      {/* <Line
         type="monotone"
         dataKey="pv"
         stroke="#8284d8"
         activeDot={{ r: 8 }}
-      />
-      <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+      /> */}
+      <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
     </LineChart>
   );
 }
@@ -144,7 +148,20 @@ function App() {
 
   // let results = [];
 
-  
+  const [isShown, setIsShown] = useState(false);
+  const [code, setCode] = useState('');
+
+  const handleClick = (props) => {
+    // 👇️ toggle shown state
+    setIsShown(true);
+    setCode(props);
+    // console.log('tronchiz');
+    // console.log(props);
+    // console.log(code);
+    // 👇️ or simply set it to true
+    // setIsShown(true);
+
+  };
 
   useEffect(() => {
     const getAllList = async () => {
@@ -157,12 +174,6 @@ function App() {
     getAllList();
   }, []);
 
-  const callGraph = () => {
-    console.log('callGraph');
-    <Graph />
-  }
-
-
   return (
     <div className="App">
       <h1 id="Titre">
@@ -174,13 +185,16 @@ function App() {
           <div className="Stations">
             {array.data ? "" : <h1>Fetching data...</h1>}
             {array.data?.map((data, idx) => (
-            <h3 key={idx} className="Station" onClick={() => callGraph()}>{data.libelle_station}, {data.libelle_region}</h3>
+            <h3 key={idx} className="Station" onClick={() => handleClick(data.code_station)}>{data.libelle_station}, {data.libelle_region}</h3>
             ))}
           </div>
         </div>
+        {/* <div className="Graph">
+          {isShown && <Graph code={array.data[0].code_station}/>}
+        </div> */}
         <div className="Graph">
-          <Graph />
-        </div> 
+          {isShown && <Graph code_station={code}/>}
+        </div>
       </div>
     </div>
   );
