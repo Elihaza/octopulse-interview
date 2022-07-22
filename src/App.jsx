@@ -12,98 +12,59 @@ import React, { useEffect, useState } from 'react';
 
 function Graph(props) {
   const [array, setArray] = useState([]);
-  console.log(props);
-  const url = 'https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=' + props.code_station + '&size=1';
-
+  // const [url, setUrl] = useState('https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=');
+  const url = "https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=" + props.code_station + "&size=1&exact_count=true&format=json&pretty";
   // console.log(props);
-  console.log(url);
-  useEffect(() => {
-    const getAllList = async () => {
-      const response = await fetch(url);
-      const jsonData = await response.json();
-      // console.log(jsonData);
-      setArray(jsonData);
-      // console.log(array);
-    }
-    getAllList();
-  }, []);
+  // setUrl(url + props.code_station + '&size=1')
+  // console.log(props);
+  // useEffect(() => {
+  const getTemp = async () => {
+    const response = await fetch(url);
+    const jsonData = await response.json();
+    console.log(jsonData);
+    setArray(jsonData);
+    // console.log(array.count);
+  }
+  // getTemp();
+  // }, []);
 
-  console.log('oeoelegraph');
-  const data = [
-    {
-      date: "Page A",
-      temperature: 4000,
-      // pv: 2400,
-      amt: 2400
-    },
-    {
-      date: "Page B",
-      temperature: 3000,
-      // pv: 1398,
-      amt: 2210
-    },
-    {
-      date: "Page C",
-      temperature: 2000,
-      // pv: 9800,
-      amt: 2290
-    },
-    {
-      date: "Page D",
-      temperature: 2780,
-      // pv: 3908,
-      amt: 2000
-    },
-    {
-      date: "Page E",
-      temperature: 1890,
-      // pv: 4800,
-      amt: 2181
-    },
-    {
-      date: "Page F",
-      temperature: 2390,
-      // pv: 3800,
-      amt: 2500
-    },
-    {
-      date: "Page G",
-      temperature: 3490,
-      // pv: 4300,
-      amt: 2100
-    },
-    {
-      date: "Test",
-      temperature: 4300,
-      // pv: 4300,
-      amt: 2100
-    }
-  ];
+  // console.log(array.count);
+  // if (!array.data) return <h1 onClick={() => getTemp()}>loading...</h1>;
   return (
-    <LineChart
-      width={800}
-      height={500}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="date" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      {/* <Line
-        type="monotone"
-        dataKey="pv"
-        stroke="#8284d8"
-        activeDot={{ r: 8 }}
-      /> */}
-      <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
-    </LineChart>
+      <div className="Graph">
+        <button onClick={() => {console.log('super'); getTemp()}}>Afficher temperatures</button>
+        {array.data ? <h1>
+          {array.data[0].libelle_station} {array.data[0].resultat} {array.data[0].symbole_unite}
+        </h1> : <h1>loading...</h1>}
+        {array.data ? <LineChart
+          width={800}
+          height={500}
+          data={{date: "Test",
+              temperature: array.data.resultat,
+              // pv: 4300,
+              amt: 2100
+            }}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5
+          }}
+        > 
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {/* <Line
+            type="monotone"
+            dataKey="pv"
+            stroke="#8284d8"
+            activeDot={{ r: 8 }}
+          /> */}
+          <Line type="monotone" dataKey="temperature" stroke="#82ca9d" />
+        </LineChart> : <h1>loading...</h1>}
+      </div>
   );
 }
 
@@ -148,7 +109,7 @@ function App() {
 
   // let results = [];
 
-  const [isShown, setIsShown] = useState(false);
+  const [isShown, setIsShown] = useState(true);
   const [code, setCode] = useState('');
 
   const handleClick = (props) => {
@@ -167,7 +128,7 @@ function App() {
     const getAllList = async () => {
       const response = await fetch(url);
       const jsonData = await response.json();
-      console.log(jsonData);
+      // console.log(jsonData);
       setArray(jsonData);
       // console.log(array);
     }
@@ -192,9 +153,7 @@ function App() {
         {/* <div className="Graph">
           {isShown && <Graph code={array.data[0].code_station}/>}
         </div> */}
-        <div className="Graph">
-          {isShown && <Graph code_station={code}/>}
-        </div>
+        {isShown && <Graph code_station={code}/>}
       </div>
     </div>
   );
