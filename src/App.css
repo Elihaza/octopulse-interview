@@ -48,15 +48,26 @@
 }
 
 .Graph {
+  position: fixed;
+  right: 15em;
+  bottom: 4.5em;
   display: flex;
   flex-direction: column;
   text-align: center;
+  align-content: center;
   background-color: rgb(9, 19, 31);
   margin-top: 15.5rem;
   margin-bottom: auto;
   margin-left: 7rem;
   border-radius: 20px 20px 20px 20px;
-  /* padding: 1rem 1rem 1rem 0.5rem; */
+  padding: 1rem 1rem 1rem 0.5rem;
+}
+
+#reload {
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 /* .App-logo {
