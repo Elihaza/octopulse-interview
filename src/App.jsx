@@ -11,7 +11,8 @@ import {
 import React, { useEffect, useState } from 'react';
 
 
-// Component that renders the Graph, props are the code_station of the station sent by the handleClick function line 80
+/*Component that renders the Graph,
+props are the code_station of the station sent by the handleClick function in App component */
 function Graph(props) {
   const [array, setArray] = useState([]); // state to store data of one station
   const url = "https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=" + props.code_station + "&date_debut_mesure=2000-01-01&size=20000";
@@ -78,13 +79,7 @@ function App() {
   const [array, setArray] = useState([]); // state to store list of all stations
   const url = 'https://hubeau.eaufrance.fr/api/v1/temperature/station';
 
-  const [isShown, setIsShown] = useState(true);
   const [code, setCode] = useState(''); // state that stores the code_station
-
-  const handleClick = (props) => {
-    setIsShown(true);
-    setCode(props);
-  };
 
   useEffect(() => {
     const getAllList = async () => {
@@ -113,11 +108,11 @@ function App() {
 
             {/* loops on the array of stations and displays them */}
             {array.data?.map((data, idx) => (
-            <h3 key={idx} className="Station" onClick={() => handleClick(data.code_station)}>{data.libelle_station}, {data.libelle_region}</h3>
+            <h3 key={idx} className="Station" onClick={() => setCode(data.code_station)}>{data.libelle_station}, {data.libelle_region}</h3>
             ))}
           </div>
         </div>
-        {isShown && <Graph code_station={code}/>}
+        <Graph code_station={code}/>
       </div>
     </div>
   );
