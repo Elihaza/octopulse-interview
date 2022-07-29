@@ -15,12 +15,14 @@ import React, { useEffect, useState } from 'react';
 props are the code_station of the station sent by the handleClick function in App component */
 function Graph(props) {
   const [array, setArray] = useState([]); // state to store data of one station
-  const url = "https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=" + props.code_station + "&date_debut_mesure=2000-01-01&size=20000";
+  const url = "https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=" + props.code_station + "&date_debut_mesure=2000-01-01";
   
   
   const getTemp = async () => {
     const response = await fetch(url);
     const jsonData = await response.json();
+    console.log(jsonData);
+    console.log(jsonData.data[(jsonData.data.length - 4)/ 2]);
     setArray(jsonData);
   }
 
