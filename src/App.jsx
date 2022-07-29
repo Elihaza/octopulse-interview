@@ -21,8 +21,6 @@ function Graph(props) {
   const getTemp = async () => {
     const response = await fetch(url);
     const jsonData = await response.json();
-    console.log(jsonData);
-    console.log(jsonData.data[(jsonData.data.length - 4)/ 2]);
     setArray(jsonData);
   }
 
