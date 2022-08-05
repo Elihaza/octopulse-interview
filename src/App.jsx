@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 
 
 /*Component that renders the Graph,
-props are the code_station of the station sent by the handleClick function in App component */
+props are the code_station of the station sent by the onClick function in App component */
 function Graph(props) {
   const [array, setArray] = useState([]); // state to store data of one station
   const url = "https://hubeau.eaufrance.fr/api/v1/temperature/chronique?code_station=" + props.code_station + "&date_debut_mesure=2000-01-01";
