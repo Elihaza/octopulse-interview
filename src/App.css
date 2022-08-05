@@ -28,7 +28,8 @@
 .Stations {
   display: flex;
   justify-content: left;
-  align-content: center;flex-direction: column;
+  align-content: center;
+  flex-direction: column;
   background-color: rgb(23, 15, 146);
   padding-top: 0.5rem;
   padding-left: 1.5rem;
